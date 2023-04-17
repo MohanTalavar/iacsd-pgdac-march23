@@ -1,32 +1,67 @@
-// Accept 10 integers from user and count the occurrences of each element in the array.
+import java.util.*;
 
-import java.util.Scanner;
+public class arrays {
 
-public class COPOSSolutionQ3 {
-    public static void main(String[] args) {
-        Scanner in = new Scanner(System.in);
+	public static void main(String[] args) {
+		Scanner sc = new Scanner(System.in);
+		
+		System.out.println("Enter the size of array");
+		int a[] = new int[sc.nextInt()];
+		
+		// Taking size as input from user
+		
+		System.out.println("Enter the elements of array");
+		// Taking elements as input
+		for (int i = 0; i < a.length; i++) {
+			a[i] = sc.nextInt();
+		}
 
-        int[] arr = new int[10];
+		System.out.println("Elements of array: ");
+		// Printing array elements
+		
+		for(int i=0; i<a.length; i++) {
+		    System.out.print(a[i]+" ");
+		}
+		System.out.println();
+		
+		// Sorting array
+		int temp = 0;
+		for (int i = 0; i < a.length; i++) {
+			for (int j = i + 1; j < a.length; j++) {
+				if (a[i] > a[j]) {
+					temp = a[i];
+					a[i] = a[j];
+					a[j] = temp;
+				}
+			}
+		}
 
-        System.out.println("Enter the 10 elements of your array: ");
-      
-      // Asking user for inputs using for loop
-      for (int i = 0; i < arr.length; i++) {
-            System.out.println("Element " + (i + 1) + ": ");
-            arr[i] = in.nextInt();
-        }
-      
-      // Checking the occurance of each element in the array
-                for (int i = 0; i < arr.length; i++) {
-                    int count = 0;
-                  
-                    for (int k = 0; k < arr.length; k++) {
-                        if (arr[i] == arr[k])
-                            count++;
-                    }
-                  
-                  // Printing out the occurance of each element in the array
-                    System.out.println(arr[i] + " occurs " + count + " times in the Array");
-                }
-    }
+		int count = 0;			// To count the frequency
+		int i = 0;			// Loop iterator
+		for (int j = i + 1; j < a.length; j++) 
+		{
+			// Traversing through the array
+			// Track the just next element to i'th index
+			if (a[i] == a[j]) {//if element matches then count++
+				count++;
+
+			} 
+			else 
+			{
+				System.out.println("frequency of element " + a[i] + " is " + (count + 1));
+				
+				// Print count+1 because there will be atleast one element
+				i = j;//reset the i'th index
+				
+				count = 0;//reset the count
+
+			}
+		}
+		
+		System.out.println("frequency of element " + a[a.length - 1] + " is " + (count + 1));
+		// The last element will be left untracked 
+		// So this statement is specially for last element
+
+	}
+
 }
