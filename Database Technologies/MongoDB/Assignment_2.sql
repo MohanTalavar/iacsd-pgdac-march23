@@ -21,7 +21,8 @@ db.emp.insertMany([
     },
     project: [
       { name: "Project-1", Hrs: 4 },
-      { name: "project-2", Hrs: 4 }
-    ]
+      { name: "Project-2", Hrs: 4 }
+    ],
+	bonus: 10000
   }
 ]);
