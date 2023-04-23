@@ -103,3 +103,19 @@ db.emp.update(
    { multi: true }
 )
 
+11. Change the salary of employees to 10000 only if their salary is < 10000
+>
+db.emp.update( 
+	{sal: {$lt:10000}},
+	{$set: {sal:10000}},
+	{multi:true}
+);
+
+12. Increase bonus of all employees by 500 if the bonus is <2000 or their salary is < 20000 or if employee belong to sales department
+>
+db.emp.update( 
+	{sal:{$lt:20000}, "dept.dname":'Sales' },
+	{$inc:{sal:500}},
+	{multi:true}
+);
+
