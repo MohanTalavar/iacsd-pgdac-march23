@@ -66,3 +66,40 @@ db.emp.update( { sal:{$gt:30000, $lt:50000 }},
  { $inc: {sal:15000}},
  {multi:true}
  )
+ 
+ 6. increment bounus by 1000 for all employees if salary <=30000
+>
+db.emp.update( {sal: {$lte:30000}},
+{$inc: {sal:1000}},
+{mutli:true}
+)
+
+7. Change manager name to Tushar for all employees whose manager is currently “satish”
+And manager number to 3333
+>	
+db.emp.update( { "mgr.name": 'Satish'},
+{ $set:{"mgr.name":'Tushar'}},
+{multi:true});
+ 
+8. Increase salary of all employees from “purchase department” by 15000
+>
+db.emp.update( {"dept.dname":'purchase department'},
+{$inc: { sal:15000}},
+{multi:true}
+);
+
+9. Decrease number of hrs by 2 for all employees who are working on project-2
+>
+db.emp.update( {"project.name":'Project-2'},
+{$inc: {" project.Hrs":-2, }},
+{multi:true}
+);
+
+10. Delete project-2 from all employee document if they are working on the project for 4 hrs
+>
+db.emp.update(
+   { "project": { $elemMatch: { "name": "Project-2", "Hrs": 4 } } },
+   { $pull: { "project": { "name": "Project-2", "Hrs": 4 } } },
+   { multi: true }
+)
+
