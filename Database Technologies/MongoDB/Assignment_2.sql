@@ -145,3 +145,42 @@ db.emp.update(
 	{multi:true}
 );
 
+15. Change designation of all employees to senior programmer 
+if they are working on name:”Project-1” for 4 hrs
+>
+db.emp.update( 
+	{project:{$elemMatch:{name:'Project-1',Hrs:4}} },
+	{ $set:{Desg:'senior programmer'}},
+	{multi:true}
+);
+
+16. Add list of hobbies in all employees document 
+whose manager is Rajan or Revati
+>
+db.emp.update( 
+	{"mgr.name":{$in:['Rajan','Revati']}},
+	{$push:{"Hobbies": {$each:['Reading','Dancing']}}},
+	{multi:true}
+);
+// Adding revati as a manager.
+db.emp.update( 
+	{"mgr.name":""},
+	{$set:{"mgr.name":'Revati'}},
+	{multi:true}
+);
+
+17. Add list of skillset in all employee documents 
+who are working on project-4 for 3 hrs or
+on project-3 for 4 hrs 
+>
+
+db.emp.update( 
+	{
+	"project":{$elemMatch:{ $in: [{name:'Project-3',Hrs:4},{name:'Project-4',Hrs:3}]}}
+	},
+	{
+	$push:{"Skillset":{$each:['Java','C']}}
+	},
+	{multi:true}
+);
+
