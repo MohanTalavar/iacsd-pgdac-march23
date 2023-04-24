@@ -119,3 +119,32 @@ db.emp.update(
 	{multi:true}
 );
 
+13. Add 2 new project at position 2 for all employees
+with designation analyst or salary is 
+equal to either 30000 or 33000 or 35000
+>
+db.emp.update(
+  {Desg: 'Analyst', sal: {$in: [30000, 33000, 35000]}},
+  {
+    $push: {
+      project: {
+        $each: [
+          {name: 'Project-11', Hrs: 10},
+          {name: 'Project-12', Hrs: 11}
+        ],
+        $position: 2
+      }
+    }
+  },
+  {multi: true}
+);
+
+14. Delete last project of all employees with department
+ name is “HR” and if the location is Mumbai
+ >
+ db.emp.update( 
+	{},
+	{},
+	{multi:true}
+);
+
