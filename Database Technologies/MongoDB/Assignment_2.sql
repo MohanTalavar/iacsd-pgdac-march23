@@ -145,8 +145,7 @@ db.emp.update(
 	{multi:true}
 );
 
-15. Change designation of all employees to senior programmer 
-if they are working on name:”Project-1” for 4 hrs
+15. Change designation of all employees to senior programmer if they are working on name:”Project-1” for 4 hrs
 >
 db.emp.update( 
 	{project:{$elemMatch:{name:'Project-1',Hrs:4}} },
@@ -154,8 +153,7 @@ db.emp.update(
 	{multi:true}
 );
 
-16. Add list of hobbies in all employees document 
-whose manager is Rajan or Revati
+16. Add list of hobbies in all employees document whose manager is Rajan or Revati
 >
 db.emp.update( 
 	{"mgr.name":{$in:['Rajan','Revati']}},
@@ -169,11 +167,8 @@ db.emp.update(
 	{multi:true}
 );
 
-17. Add list of skillset in all employee documents 
-who are working on project-4 for 3 hrs or
-on project-3 for 4 hrs 
+17. Add list of skillset in all employee documents who are working on project-4 for 3 hrs or on project-3 for 4 hrs 
 >
-
 db.emp.update( 
 	{
 	"project":{$elemMatch:{ $in: [{name:'Project-3',Hrs:4},{name:'Project-4',Hrs:3}]}}
