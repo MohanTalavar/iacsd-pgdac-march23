@@ -167,18 +167,6 @@ db.emp.update(
 	{multi:true}
 );
 
-17. Add list of skillset in all employee documents who are working on project-4 for 3 hrs or on project-3 for 4 hrs 
->
-db.emp.update( 
-	{
-	"project":{$elemMatch:{ $in: [{name:'Project-3',Hrs:4},{name:'Project-4',Hrs:3}]}}
-	},
-	{
-	$push:{"Skillset":{$each:['Java','C']}}
-	},
-	{multi:true}
-);
-
 17. Add list of skillset in all employee documents 
 who are working on project-4 for 3 hrs or
 on project-3 for 4 hrs 
