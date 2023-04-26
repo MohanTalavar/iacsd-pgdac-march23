@@ -167,11 +167,8 @@ db.emp.update(
 	{multi:true}
 );
 
-17. Add list of skillset in all employee documents 
-who are working on project-4 for 3 hrs or
-on project-3 for 4 hrs 
+17. Add list of skillset in all employee documents who are working on project-4 for 3 hrs oron project-3 for 4 hrs 
 >
-
 db.emp.update( 
 	{
 	"project":{$elemMatch:{ $in: [{name:'Project-3',Hrs:4},{name:'Project-4',Hrs:3}]}}
@@ -183,9 +180,7 @@ db.emp.update(
 );
 
 
-18. Add a new hobby as blogging at 3 position in hobbies array
-for all employess whose 
-name starts with R or M and ends with j or s
+18. Add a new hobby as blogging at 3 position in hobbies arrayfor all employess whose name starts with R or M and ends with j or s
 >
 db.emp.update(
   { 
@@ -199,11 +194,8 @@ db.emp.update(
   }
 );
 
-19. Increase salary by 10000 for all employees 
-who are working on project-2 or project-3 or project-1
-Decrease bonus by 1000 rs And increase salary
-by 1000rs for all employees whose 
-department location is Mumbai
+19. Increase salary by 10000 for all employees who are working on project-2 or project-3 or project-1Decrease bonus by 1000 rs And increase salary
+by 1000rs for all employees whose department location is Mumbai
 >
 db.emp.update( 
 	{"project.name": {$in:[ 'Project-1', 'Project-2', 'Project-3']}},
@@ -211,6 +203,7 @@ db.emp.update(
 	{multi:true}
 );
 
+>
 db.emp.update( 
 	{ "dept.dloc":'Mumbai'},
 	{$inc: {bonus:-1000, sal:1000}},
@@ -229,8 +222,7 @@ db.emp.deleteMany(
 > 
 NEED TO FIND!!!!!!!!
 
-22. Change skill python to python 3.8 for all employees 
-if python is there in the skillset
+22. Change skill python to python 3.8 for all employees if python is there in the skillset
 >
 db.emp.update( 
 	{ "Skillset":'Python'},
@@ -238,9 +230,7 @@ db.emp.update(
 	{multi:true}
 );
 
-23. Add 2 skills MongoDb and Perl at the end of skillset 
-array for all employees who are 
-working at Pune location                                             
+23. Add 2 skills MongoDb and Perl at the end of skillset array for all employees who are working at Pune location                                             
 >
 db.emp.update( 
 	{ "dept.dloc":'Pune'},
@@ -248,9 +238,7 @@ db.emp.update(
 	{multi:true}
 );
 
-24. Delete first hobby from hobby array for 
-all employees who are working on project-1 
-or project-2
+24. Delete first hobby from hobby array for all employees who are working on project-1 or project-2
 >
 db.emp.update( 
 	{ "project.name": { $in: ['Project-1', 'Project-2']}},
