@@ -246,3 +246,28 @@ db.emp.update(
 	{multi:true}
 );
 
+25. Delete last hobby from hobbies array for all employees who are working on project which is at 2 nd position in projects array for 4 hrs 
+>
+db.emp.update( 
+	{"prject.1.Hrs":4},
+	{$pop: {Hobbies:1}},
+	{multi:true}
+);
+
+26. Add 2 new projects at the end of array for all employees whose skillset contains Perl or python 
+>
+db.emp.update( 
+	{"Skillset": 'Python 3.8'},
+	{$push:{ project: {$each :[ {"name":'Project-10', "Hrs":10},
+	{"name":'Project-11', "Hrs":11}]}}},
+	{multi:true}
+);
+
+27. Change hrs to 6 for project-1 for all employees if they working on the project-1 for < 6 hrs. otherwise keep the existing value
+>
+db.emp.update(
+  {"project.name": "Project-2", "project.Hrs": {$lt: 6}},
+  {$set: {"project.$.Hrs": {$max: [6, "$project.$.Hrs"]}}},
+  {multi: true}
+);
+
