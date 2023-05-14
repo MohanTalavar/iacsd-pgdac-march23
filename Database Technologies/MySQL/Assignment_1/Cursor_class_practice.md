@@ -37,9 +37,11 @@ Otherwise increase by 8%**
 Note: Here pccnt : counting no of updated salaries of Clerk.  
 	   pacnt : counting no of updated salaries of Analyst.  
 	   pmcnt : counting no of updated salaries of Manager.  
-	   pocnt : counting no of updated salaries of Others.  
+	   pocnt : counting no of updated salaries of Others.   
+	   
+IMP:   SET VARIABLES AFTER THE ENTIRE DECLARATION BLOCK 
+       Eg: line 68-71   
 
-	
 	delimiter //                       
 
 	create procedure empupdatesal4(
