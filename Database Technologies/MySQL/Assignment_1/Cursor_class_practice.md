@@ -32,8 +32,12 @@
 If manager, then increase it by 10%
 If analyst, then increase by 20%
 If CLERK, the increase by 25%
-Otherwise increase by 8%**
+Otherwise increase by 8%**   
 
+Note: Here pccnt : counting no of updated salaries of Clerk.  
+	   pacnt : counting no of updated salaries of Analyst.  
+	   pmcnt : counting no of updated salaries of Manager.  
+	   pocnt : counting no of updated salaries of Others.  
 
 	delimiter //
 	create procedure update_emp_sal(
