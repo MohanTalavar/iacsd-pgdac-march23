@@ -39,68 +39,72 @@ Note: Here pccnt : counting no of updated salaries of Clerk.
 	   pmcnt : counting no of updated salaries of Manager.  
 	   pocnt : counting no of updated salaries of Others.  
 
-	delimiter //
-	create procedure update_emp_sal(
+	
+	delimiter //                       
+
+	create procedure empupdatesal4(
 	out pccnt int,
-	out pacnt int,out pmcnt int,
-	out pocnt int)
-	begin
+	out pmcnt int,
+	out pacnt int,
+	out pocnt int
+	)
+	begin 
+
 	declare finished int default 0;
-	declare vempno,vmgr,vdeptno int;
-	declare vename,vjob varchar(20);
+
+	declare vempno, vmgr, vdeptno int;
+	declare vename, vjob varchar(20);
 	declare vhiredate date;
-	declare vsal,vcomm,vupdt_sal double;
-	declare emp_cur cursor for select * from emp;
-	declare continue handler for not found set finished=1;
-	set pccnt=0;
-	set pmcnt=0;
-	set pocnt=0;
+	declare vsal, vcomm double(9,2);
+	declare vupdsal double(9,2);
+	declare hike float(5,2);
+
+	declare emp_cur cursor for select * from emporg;
+
+	declare continue handler for not found set finished =1;
+
 	set pacnt=0;
+	set pmcnt=0;
+	set pccnt=0;
+	set pocnt=0;
+
 	open emp_cur;
 	L1:loop
-	fetch emp_cur into vempno, vename, vjob,vmgr,
-	vhiredate, vsal,vcomm, vdeptno;
-	if finished=1 then
-		leave L1;
+	fetch emp_cur into vempno, vename,vjob,vmgr,vhiredate,vsal,vcomm,vdeptno;
+	if finished=1
+		then leave L1;
 	end if;
 	
-	
-	if vjob='manager' then
-	set vupdt_sal=1.10*vsal;
-	update emp
-	set sal=1.1*sal
-	where empno=vempno;
-	set pmcnt=pmcnt+1;
-	
-	elseif vjob='analyst' then
-	set vupdt_sal=1.20*vsal;
-	update emp
-	set sal=1.20*sal
-	where empno=vempno;
-	set pacnt=pacnt+1;
-	
+	if vjob='manager' then 
+		set hike=0.10;
+		set pmcnt=pmcnt+1;
+	elseif vjob='analyst' then 
+		set hike=0.20;
+		set pacnt=pacnt+1;
 	elseif vjob='clerk' then 
-	set vupdt_sal=1.25*vsal;
-	update emp
-	set sal=1.25*sal
-	where empno=vempno;
-	set pccnt=pccnt+1;
-	
+		set hike=0.25;
+		set pccnt=pccnt+1;
 	else 
-		set vupdt_sal=1.08*vsal;
-		update emp
-		set sal=1.08*sal
-		where empno=vempno;
+		set hike=0.08;
 		set pocnt=pocnt+1;
 	end if;
 	
-	select vempno,vename,vjob,vsal,vcomm,vupdt_sal;
+	set vupdsal = vsal+vsal*hike;
+	
+	update emporg 
+	set sal= vupdsal
+	where empno=vempno;
+	
+	select vempno, vename,vjob,vmgr,vhiredate,vsal,vupdsal,vcomm,vdeptno;
 	end loop;
-	select pmcnt,pacnt,pccnt,pocnt;
+	select pccnt,pacnt,pmcnt,pocnt;
 	close emp_cur;
+						
 	end//
 	delimiter ;
 
+call empupdatesal4(@a,@b,@c,@d);
+	
 **Q3 Write a procedure to update price of product using cursor.
 If the category is chips then increase the price by 10%
 If the category is cold drink then increase the price by 20%
